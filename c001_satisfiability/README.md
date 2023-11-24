@@ -19,12 +19,12 @@ For this particular example, one possible truth assignment that satisfies this f
 
 For our challenge, we use a version of the 3-SAT problem with configureable difficulty, where the following two parameters can be adjusted in order to vary the diffculty of the challenge:
 
-- Parameter 1: $num\_variables$ = **The number of variables**.  
-- Parameter 2: $clauses\_to\_variables\_percent$ = **The number of variables as a percentage of the number of clauses**. 
+- Parameter 1: $num\textunderscore{ }variables$ = **The number of variables**.  
+- Parameter 2: $clauses\textunderscore{ }to\textunderscore{ }variables\textunderscore{ }percent$ = **The number of variables as a percentage of the number of clauses**. 
 
 The number of clauses is derived from the above parameters.
 
-$$num\_clauses = floor(num\_variables \cdot \frac{clauses\_to\_variables\_percent}{100})$$
+$$num\textunderscore{ }clauses = floor(num\textunderscore{ }variables \cdot \frac{clauses\textunderscore{ }to\textunderscore{ }variables\textunderscore{ }percent}{100})$$
 
 Where $floor$ is a function that rounds a floating point number down to the closest integer.
 

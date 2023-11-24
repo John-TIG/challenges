@@ -6,7 +6,7 @@ This repo contains code for the challenges and algorithms featured in [The Innov
 
 ## License
 
-Algorithm code files in folders `<challenge_id>/algorithms` are licensed under the following licenses:
+Each of the algorithm code files in folders `<challenge_id>/algorithms` are licensed under all of the following licenses:
 
 * TIG Inbound Game License
 * TIG Innovator Outbound Game License
@@ -14,7 +14,7 @@ Algorithm code files in folders `<challenge_id>/algorithms` are licensed under t
 * TIG Commercial License
 * TIG Open Data License
 
-For more information about these licenses, read the [TIG IP Policy Rationale](https://github.com/tig-foundation/docs/blob/main/TIG_IP_Policy_v15.pdf).
+For more information about these licenses, read the [TIG IP Policy Rationale](https://github.com/tig-foundation/docs/blob/main/TIG_IP_Policy.pdf).
 
 All other files are licensed under MIT:
 

@@ -12,18 +12,18 @@ Figure 1 (below) illustrates a simple example.  In this case, the weight of all 
 
 For our challenge, we use a version of the knapsack problem with configurable difficulty, where the following two parameters can be adjusted in order to vary the diffculty of the challenge:
 
-- Parameter 1:  $num\_items$
-- Parameter 2: $percent\_better\_than\_expected\_value$
+- Parameter 1:  $num\textunderscore{ }items$
+- Parameter 2: $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }expected\textunderscore{ }value$
 
-$num\_items$ is the number of items from which you need to select a subset to put in the knapsack. We impose a weight constraint $W(S_{knapsack}) <= 0.5 \cdot W(S_{all})$, where the knapsack can hold at most half the total weight of all items.
+$num\textunderscore{ }items$ is the number of items from which you need to select a subset to put in the knapsack. We impose a weight constraint $W(S_{knapsack}) <= 0.5 \cdot W(S_{all})$, where the knapsack can hold at most half the total weight of all items.
 
-For a particular $percent\_better\_than\_expected\_value$, the objective is to find a combination of items such that the total value of items in the knapsack is $percent\_better\_than\_expected\_value$ greater than half the total value of all items:
+For a particular $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }expected\textunderscore{ }value$, the objective is to find a combination of items such that the total value of items in the knapsack is $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }expected\textunderscore{ }value$ greater than half the total value of all items:
 
-$$V(S_{knapsack}) >= (1 + \frac{percent\_better\_than\_expected\_value}{100}) \cdot \frac{V(S_{all})}{2}$$
+$$V(S_{knapsack}) >= (1 + \frac{percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }expected\textunderscore{ }value}{100}) \cdot \frac{V(S_{all})}{2}$$
 
-The larger the $num\_items$, the more number of possible $S_{knapsack}$, making the challenge more difficult. Also, the higher $percent\_better\_than\_expected\_value$, the less likely a given $S_{knapsack}$ will be a solution, making the challenge more difficult.
+The larger the $num\textunderscore{ }items$, the more number of possible $S_{knapsack}$, making the challenge more difficult. Also, the higher $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }expected\textunderscore{ }value$, the less likely a given $S_{knapsack}$ will be a solution, making the challenge more difficult.
 
-The weight $w_j$ of each of the $num\_items$ is an integer, chosen independently, uniformly at random, and such that each of the item weights $1 <= w_j <= 50$, for $j=1,2,...,num\_items$. The values of the items $v_j$ are similarly selected at random from the same distribution.
+The weight $w_j$ of each of the $num\textunderscore{ }items$ is an integer, chosen independently, uniformly at random, and such that each of the item weights $1 <= w_j <= 50$, for $j=1,2,...,num\textunderscore{ }items$. The values of the items $v_j$ are similarly selected at random from the same distribution.
 
 ## Worked Example
 
