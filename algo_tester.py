@@ -36,12 +36,12 @@ param2 = {
         'default_values': [300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400]
     }, 
     'c002_vehicle_routing': {
-        'name': 'percent_better_than_baseline',
-        'default_values': [25, 30, 35, 40, 45, 50]
+        'name': 'better_than_baseline',
+        'default_values': [200, 250, 300, 350, 400, 450, 500]
     },
     'c003_knapsack': {
-        'name': 'percent_better_than_expected_value',
-        'default_values': [20, 30, 40, 50, 60, 70]
+        'name': 'better_than_baseline',
+        'default_values': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
 }
 

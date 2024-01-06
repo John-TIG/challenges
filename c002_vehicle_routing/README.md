@@ -13,7 +13,7 @@ In the CVRP, a fleet of identical vehicles based at a central depot must be rout
 For our challenge, we use a version of the Capacitated Vehicle Routing problem with configurable difficulty, where the following two parameters can be adjusted in order to vary the diffculty of the challenge:
 
 - Parameter 1: $num\textunderscore{ }nodes$
-- Parameter 2: $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }baseline$
+- Parameter 2: $better\textunderscore{ }than\textunderscore{ }baseline$
 
 $num\textunderscore{ }nodes$ is the number of customers (plus 1 depot) which are uniformly at random placed on a grid of 500 by 500 with the depot at the center (250, 250). 
 
@@ -21,7 +21,7 @@ The demand of each customer is uniformly at random selected from the range [15, 
 
 We use a naive greedy algorithm to generate the baseline routes by iteratively selecting the closest unvisited node (returning to depot when necessary) until all drop-offs are made.
 
-For a particular $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }baseline$, the objective is to find a set of routes such that the total distance travelled is $percent\textunderscore{ }better\textunderscore{ }than\textunderscore{ }baseline$ shorter than the total distance of the baseline routes.
+$better\textunderscore{ }than\textunderscore{ }baseline$ can be interpreted as a percentage by dividing by 10. The objective is to find a set of routes such that the total distance travelled is $better\textunderscore{ }than\textunderscore{ }baseline / 10$% shorter than the total distance of the baseline routes.
 
 ## Worked Example
 

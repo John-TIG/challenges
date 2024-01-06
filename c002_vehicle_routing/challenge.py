@@ -64,8 +64,9 @@ def calcRoutesTotalDistance(num_nodes: int, max_capacity: int, demands: np.ndarr
 class Difficulty:
     # Number of nodes (including depot) for the vehicle routing problem
     num_nodes: int
-    # The distance of your routes have to be this percentage shorter than routes found by a baseline algorithm
-    percent_better_than_baseline: int
+    # Can be interpreted as a percentage by dividing by 10.
+    # The distance of your routes have to be (better_than_baseline / 10)% shorter than routes found by a baseline algorithm
+    better_than_baseline: int
 
 @dataclass
 class Challenge:
@@ -101,7 +102,7 @@ class Challenge:
         distance_matrix = np.linalg.norm(node_positions[:, None, :] - node_positions[None, :, :], axis=2).astype(int)
         baseline_routes = calcBaselineRoutes(difficulty.num_nodes, cls.max_capacity, demands, distance_matrix)
         baseline_routes_total_distance = calcRoutesTotalDistance(difficulty.num_nodes, cls.max_capacity, demands, distance_matrix, baseline_routes)
-        max_total_distance = int(baseline_routes_total_distance * (100 - difficulty.percent_better_than_baseline) / 100)
+        max_total_distance = int(baseline_routes_total_distance * (1000 - difficulty.better_than_baseline) / 1000)
 
         return cls(
             seed=seed,

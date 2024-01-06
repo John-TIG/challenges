@@ -4,8 +4,11 @@ import numpy as np
 
 @dataclass
 class Difficulty:
+    # The number of items from which you need to select a subset to put in the knapsack
     num_items: int
-    percent_better_than_expected_value: int
+    # Can be interpreted as a percentage by dividing by 10
+    # The value of items you select must be at least (better_than_baseline / 10)% higher than the baseline greedy algorithm
+    better_than_baseline: int
 
 @dataclass
 class Challenge:
@@ -35,7 +38,15 @@ class Challenge:
         weights = np.random.randint(1, 50, size=difficulty.num_items)
         values = np.random.randint(1, 50, size=difficulty.num_items)
         max_weight = int(np.sum(weights) / 2)
-        min_value = int(np.sum(values) / 2 * (1 + difficulty.percent_better_than_expected_value / 100))
+        # baseline greedy algorithm
+        sorted_value_to_weight_ratio = np.argsort(-values / weights)
+        total_weight, min_value = 0, 0
+        for item in sorted_value_to_weight_ratio:
+            if total_weight + weights[item] > max_weight:
+                continue
+            min_value += values[item]
+            total_weight += weights[item]
+        min_value = int(min_value * (1 + difficulty.better_than_baseline / 1000))
         return cls(
             seed=seed,
             difficulty=difficulty,
