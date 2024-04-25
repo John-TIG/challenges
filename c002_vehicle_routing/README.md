@@ -10,12 +10,12 @@ In the CVRP, a fleet of identical vehicles based at a central depot must be rout
 
 # Example
 
-The following in an example of the Capacitated Vehicle Routing problem with configurable difficulty. Two parameters can be adjusted in order to vary the difficulty of the challenge instance:
+The following is an example of the Capacitated Vehicle Routing problem with configurable difficulty. Two parameters can be adjusted in order to vary the difficulty of the challenge instance:
 
-- Parameter 1: $num\textunderscore{ }nodes$ is the number of customers (plus 1 depot) which are  placed  uniformly at random on a grid of 500 by 500 with the depot at the centre (250, 250).  
-- Parameter 2: $better\textunderscore{ }than\textunderscore{ }baseline$ is the factor by which we require a solution to be better than the baseline value [link TIG challenges for explanation of baseline value].
+- Parameter 1: $num\textunderscore{ }nodes$ is the number of customers (plus 1 depot) which are  placed  uniformly at random on a grid of 500x500 with the depot at the centre (250, 250).  
+- Parameter 2: $better\textunderscore{ }than\textunderscore{ }baseline$ is the factor by which a solution must  be better than the baseline value [link TIG challenges for explanation of baseline value].
 
-The demand of each customer is selected independently and uniformly at random from the range [25, 50]. The maximum capacity of each vehicle is set to 100. and the baseline is set to 175.
+The demand of each customer is selected independently and uniformly at random from the range [25, 50]. The maximum capacity of each vehicle is set to 100, and the baseline is set to 175.
 
 Consider an example `Challenge` instance with `num_nodes=5` and `better_than_baseline=0.8:
 
@@ -56,4 +56,4 @@ When evaluating these routes, each route has demand less than 100, and the total
 * Total Distance = 80 + 45 = 125
 
 ## Our Challenge
-In TIG the baseline route by using a greedy algorithm to iteratively selecting the closest unvisited node (returning to depot when necessary) until all drop-offs are made. Please see the challenge code for a precise specification. 
+In TIG, the baseline route is determined by using a greedy algorithm that iteratively selects the closest unvisited node (returning to the depot when necessary) until all drop-offs are made. Please see the challenge code for a precise specification. 
