@@ -51,19 +51,42 @@ def generateInstance(seed, num_variables, better_than_baseline):
     A = np.random.rand(num_variables // 2, num_variables)
     b = np.random.rand(num_variables // 2) * 10
     
-    # Solve the QP problem using a standard solver with a time limit to obtain the baseline value
-    baseline_value = solveQP(Q, c, A, b, time_limit=10)
+    # Solve the QP problem using the Coordinate Descent algorithm to obtain the baseline value
+    baseline_value = solveQP(Q, c, A, b, max_iterations=1000)
     max_objective_value = baseline_value * better_than_baseline
     
     return Q, c, A, b, max_objective_value
 ```
 
-Note that the `solveQP` function used to obtain the baseline value is not provided in this example, but it would use a standard QP solver with a time limit (e.g., 10 seconds) to find a solution. The baseline value is then used to compute the `max_objective_value` based on the `better_than_baseline` parameter.
+The `solveQP` function uses the Coordinate Descent algorithm to obtain the baseline value. The Coordinate Descent algorithm is a simple and intuitive optimization method that works by optimizing one variable at a time while keeping the others fixed. It iteratively cycles through the variables, updating each one to minimize the objective function with respect to that variable. This process continues until convergence or a maximum number of iterations is reached.
+
+Here's the implementation of the Coordinate Descent algorithm:
+
+```python
+def coordinateDescent(Q, c, A, b, max_iterations=1000):
+    num_variables = Q.shape[0]
+    x = np.zeros(num_variables)
+    
+    for _ in range(max_iterations):
+        for i in range(num_variables):
+            # Compute the optimal value for variable i while keeping others fixed
+            numerator = np.dot(Q[i, :i], x[:i]) + np.dot(Q[i, i+1:], x[i+1:]) + c[i]
+            denominator = Q[i, i]
+            x[i] = max(0, -numerator / denominator)
+            
+            # Project the solution back onto the feasible region
+            if np.any(np.dot(A, x) > b):
+                x[i] = 0
+    
+    return x
+```
+
+By using the Coordinate Descent algorithm instead of a standard solver, we obtain a baseline value that is likely to be less optimal than the one provided by an advanced solver. This gives participants more room to find better solutions while still maintaining the difficulty of the QP problem itself.
 
 It's important to note that the introduction of the `max_objective_value` constraint may lead to instances with no solution. In such cases, the challenge is to prove that no solution exists that satisfies all the constraints, including the `max_objective_value` constraint.
 
 ## Our Challenge
-In TIG, the baseline value is determined by solving the QP problem using a standard solver with a time limit. The `better_than_baseline` parameter is then used to set the `max_objective_value` for the challenge. Participants must find a solution that achieves an objective value lower than this threshold or prove that no such solution exists.
+In TIG, the baseline value is determined by solving the QP problem using the Coordinate Descent algorithm with a maximum number of iterations. The `better_than_baseline` parameter is then used to set the `max_objective_value` for the challenge. Participants must find a solution that achieves an objective value lower than this threshold or prove that no such solution exists.
 
 The difficulty of the challenge can be adjusted by increasing the number of variables (`num_variables`) or by decreasing the `better_than_baseline` factor, requiring solutions to be closer to the optimal value.
 
@@ -84,15 +107,14 @@ class QPChallenge:
         A = np.random.rand(num_variables // 2, num_variables)
         b = np.random.rand(num_variables // 2) * 10
         
-        baseline_value = self.solveQP(Q, c, A, b, time_limit=10)
+        baseline_value = self.solveQP(Q, c, A, b, max_iterations=1000)
         max_objective_value = baseline_value * better_than_baseline
         
         return Q, c, A, b, max_objective_value
     
-    def solveQP(self, Q, c, A, b, time_limit):
-        # Use a standard QP solver with a time limit to find a solution
-        # Return the objective value of the solution found
-        pass
+    def solveQP(self, Q, c, A, b, max_iterations=1000):
+        x = coordinateDescent(Q, c, A, b, max_iterations)
+        return self.objectiveValue(x)
     
     def verifySolution(self, x):
         if x is None:
