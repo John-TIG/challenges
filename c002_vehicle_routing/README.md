@@ -8,24 +8,16 @@ In the CVRP, a fleet of identical vehicles based at a central depot must be rout
 2. The total demand serviced by each vehicle does not exceed its capacity, and
 3. Each vehicle starts and ends its route at the depot.
 
-# Our Challenge
+# Example
 
-For our challenge, we use a version of the Capacitated Vehicle Routing problem with configurable difficulty, where the following two parameters can be adjusted in order to vary the diffculty of the challenge:
+The following in an example of the Capacitated Vehicle Routing problem with configurable difficulty. Two parameters can be adjusted in order to vary the difficulty of the challenge instance:
 
-- Parameter 1: $num\textunderscore{ }nodes$
-- Parameter 2: $better\textunderscore{ }than\textunderscore{ }baseline$
+- Parameter 1: $num\textunderscore{ }nodes$ is the number of customers (plus 1 depot) which are  placed  uniformly at random on a grid of 500 by 500 with the depot at the centre (250, 250).  
+- Parameter 2: $better\textunderscore{ }than\textunderscore{ }baseline$ is the factor by which we require a solution to be better than the baseline value [link TIG challenges for explanation of baseline value].
 
-$num\textunderscore{ }nodes$ is the number of customers (plus 1 depot) which are uniformly at random placed on a grid of 500 by 500 with the depot at the center (250, 250). 
+The demand of each customer is selected independently and uniformly at random from the range [25, 50]. The maximum capacity of each vehicle is set to 100. and the baseline is set to 175.
 
-The demand of each customer is uniformly at random selected from the range [15, 30]. The maximimum capacity of each vehicle is set to 100.
-
-We use a naive greedy algorithm to generate the baseline routes by iteratively selecting the closest unvisited node (returning to depot when necessary) until all drop-offs are made.
-
-$better\textunderscore{ }than\textunderscore{ }baseline$ can be interpreted as a percentage by dividing by 10. The objective is to find a set of routes such that the total distance travelled is $better\textunderscore{ }than\textunderscore{ }baseline / 10$% shorter than the total distance of the baseline routes.
-
-## Worked Example
-
-Consider an example `Challenge` instance with `num_nodes=5`:
+Consider an example `Challenge` instance with `num_nodes=5` and `better_than_baseline=0.8:
 
 ```
 demands = [0, 25, 30, 40, 50] # a N array where index (i) is the demand at node i
@@ -37,7 +29,7 @@ distance_matrix = [ # a NxN symmetric matrix where index (i,j) is distance from 
     [40, 35, 30, 10, 0]
 ]
 max_capacity = 100 # total demand for each route must not exceed this number 
-max_total_distance = 140 # routes must have total distance under this number to be a solution 
+max_total_distance = baseline*better_than_baseline = 140 # routes must have total distance under this number to be a solution 
 ```
 
 The depot is the first node (node 0) with demand 0. The vehicle capacity is set to 100. In this example, routes must have a total distance of 140 or less to be a solution.
@@ -62,3 +54,6 @@ When evaluating these routes, each route has demand less than 100, and the total
     * Demand = 25 + 30 = 55
     * Distance = 10 + 15 + 20 = 45
 * Total Distance = 80 + 45 = 125
+
+## Our Challenge
+In TIG the baseline route by using a greedy algorithm to iteratively selecting the closest unvisited node (returning to depot when necessary) until all drop-offs are made. Please see the challenge code for a precise specification. 
